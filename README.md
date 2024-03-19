@@ -3,10 +3,19 @@
 ## Description
 This project aims to develop a deep learning-based system for automated cataract detection in eye images. The system leverages advanced machine learning algorithms And CNN models to accurately identify the presence and severity of cataracts, enabling early diagnosis and treatment.
 
+## Project structure
+ - **data/**: Directory to store raw and processed datasets, as well as trained models.
+- **mobile_app/**: Directory containing the mobile application code.
+    - android/: Android-specific configuration and resources.
+    - ios/: iOS-specific configuration and resources.
+   
+- **docs/**: Documentation files including project report, setup guides, etc.
+- **notebooks/**: Jupyter notebooks for data analysis and model training.
+- README.md: Main project README file containing project overview, setup instructions, etc.
+
 ## Installation
 1. Clone the repository: `git clone https://github.com/GeekyYouthsInfo/Deep-Learning-Cataract-Detection.git`
-2. Install dependencies: `pip install -r requirements.txt`
-3. Follow additional setup instructions in the `README.md` file.
+2. Follow additional setup instructions in the `README.md` file.
 
 ## Usage
 1. Run the main script locally: `python detect_cataracts.py`
@@ -15,10 +24,10 @@ This project aims to develop a deep learning-based system for automated cataract
 https://deep-learning-cataract-detection.readthedocs.io/en/latest/).
 
 ## Model Deployment (Cloud)
-1. The trained model is deployed on a cloud platform for scalability and accessibility.
-2. Access the deployed model through the provided API endpoint or web interface.
-3. Submit HTTP requests with eye images to the endpoint for cataract detection.
-4. Receive the detection results as JSON or through the web interface.
+1. The trained model is deployed on mobile and  a cloud platform for scalability and accessibility.
+2. Access the deployed model through the provided user facing interfaces.
+3. Submit  requests with eye images  for cataract detection.
+4. Receive the detection results through the interface.
 
 ## Dependencies
 - Python 3.7 or higher
@@ -32,9 +41,9 @@ https://deep-learning-cataract-detection.readthedocs.io/en/latest/).
 ## Contributing
 This project is a collaborative effort of a team of four individuals:
 - TODO: Led the development of the deep learning models and cloud deployment.
-- TODO : Contributed to data preprocessing and algorithm optimization.
-- TODO : Designed the user interface and conducted usability testing.
-- TODO : Handled documentation and project management tasks.
+- TODO : Led data preprocessing and algorithm optimization.
+- TODO : Led Design of  the user interface and conducted usability testing.
+- TODO : led documentation and project management tasks.
 
 If you wish to contribute to the project, please follow these steps:
 1. Fork the repository and create a new branch.
