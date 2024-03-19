@@ -18,9 +18,8 @@ This project aims to develop a deep learning-based system for automated cataract
 2. Follow additional setup instructions in the `README.md` file.
 
 ## Usage
-1. Run the main script locally: `python detect_cataracts.py`
-2. Follow on-screen instructions to upload eye images and view the detection results.
-3. For detailed usage guidelines, refer to the [documentation](
+1. Follow on-screen instructions to upload eye images and view the detection results.
+2. For detailed usage guidelines, refer to the [documentation](
 https://deep-learning-cataract-detection.readthedocs.io/en/latest/).
 
 ## Model Deployment (Cloud)
@@ -54,10 +53,10 @@ If you wish to contribute to the project, please follow these steps:
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Credits
-- TODO (Member)
-- TODO  (Member)
-- TODO  (Member)
-- TODO  (Member)
+- DERU HAWULAH NAKATO (Member 1)
+- DE GUZMAN ERNESTO ZZIWA  (Member 2)
+- MASUBA ABDQADIR  (Member 3)
+- THEMBO JONATHAN (Member 4)
 - Special thanks to the TensorFlow and OpenCV communities.
 
 ## Contact
