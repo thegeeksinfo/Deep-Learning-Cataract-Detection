@@ -30,7 +30,7 @@ https://deep-learning-cataract-detection.readthedocs.io/en/latest/).
 
 ## Dependencies
 - Python 3.7 or higher
-- TensorFlow
+- Keras  API with Tensor Flow backend
 - OpenCV
 - Other dependencies listed in `requirements.txt`
 
