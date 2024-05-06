@@ -34,6 +34,10 @@ https://deep-learning-cataract-detection.readthedocs.io/en/latest/).
 - OpenCV
 - Other dependencies listed in `requirements.txt`
 
+## Tools
+
+[image augumentor](https://github.com/mdbloice/Augmentor)
+
 ## Illustration: Project Architecture
 ![Project Architecture]()
 
