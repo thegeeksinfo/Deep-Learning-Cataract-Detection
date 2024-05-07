@@ -8,7 +8,7 @@ output_dir = "../data/augmented"
 # Function to create Augmentor pipeline for data augmentation
 def create_augmentor_pipeline(input_dir, output_dir):
     os.makedirs(output_dir, exist_ok=True)
-    p = Augmentor.Pipeline(source_directory=input_dir, output_directory=output_dir)
+    p = Augmentor.Pipeline(input_directory=input_dir, output_directory=output_dir)
     # Add augmentation operations to the pipeline
     p.rotate(probability=0.7, max_left_rotation=10, max_right_rotation=10)
     p.flip_left_right(probability=0.5)
