@@ -36,7 +36,7 @@ https://deep-learning-cataract-detection.readthedocs.io/en/latest/).
 - Other dependencies listed in `requirements.txt`
 
 ## Tools
-
+I found this tool useful for arugmentation
 [image augumentor](https://augmentor.readthedocs.io/en/stable/)
 
 ## Illustration: Project Architecture
