@@ -36,7 +36,7 @@ https://deep-learning-cataract-detection.readthedocs.io/en/latest/).
 
 ## Tools
 
-[image augumentor](https://github.com/mdbloice/Augmentor)
+[image augumentor](https://augmentor.readthedocs.io/en/stable/)
 
 ## Illustration: Project Architecture
 ![Project Architecture]()
