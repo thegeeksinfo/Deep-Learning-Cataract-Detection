@@ -1,7 +1,7 @@
 # Deep Learning-Based Cataract Detection System
 
 ## Description
-This project aims to develop a deep learning-based system for automated cataract detection in eye images. The system leverages advanced machine learning algorithms And CNN models to accurately identify the presence and severity of cataracts, enabling early diagnosis and treatment.
+This project aims to develop a deep learning-based mobile app for automated cataract detection in eye images. The system leverages advanced machine learning algorithms And CNN models to accurately identify the presence and severity of cataracts, enabling early diagnosis and treatment.
 
 ## Project structure
  - **data/**: Directory to store raw and processed datasets, as well as trained models.
