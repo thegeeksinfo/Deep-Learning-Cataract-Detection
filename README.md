@@ -37,10 +37,12 @@ https://deep-learning-cataract-detection.readthedocs.io/en/latest/).
 
 ## Tools
 I found this tool useful for arugmentation
+
 [image augumentor](https://augmentor.readthedocs.io/en/stable/)
 
-## Illustration: Project Architecture
-![Project Architecture]()
+## MOdel Project Architecture
+
+![ResNet hungingface](https://huggingface.co/microsoft/resnet-50)
 
 ## Contributing
 This project is a collaborative effort of a team of four individuals:
