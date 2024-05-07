@@ -5,6 +5,7 @@ This project aims to develop a deep learning-based mobile app for automated cata
 
 ## Project structure
  - **data/**: Directory to store raw and processed datasets, as well as trained models.
+ - **utils/**: Utility files
 - **mobile_app/**: Directory containing the mobile application code.
     - android/: Android-specific configuration and resources.
     - ios/: iOS-specific configuration and resources.
