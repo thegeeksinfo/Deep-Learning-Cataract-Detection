@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image,Button } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Button } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import placeholderImage from "../assets/images/eye2.jpg";
 import Header from './reusable/Header';
@@ -54,7 +54,7 @@ const Home = () => {
     <>
       <Header />
       <View style={styles.container2}>
-        {imageUri? (
+        {imageUri ? (
           <View>
             <Text style={styles.title}>Verify Desired Image</Text>
 
@@ -63,22 +63,22 @@ const Home = () => {
               style={styles.imgDiagnosis}
               resizeMode="cover" />
 
-<TouchableOpacity  style={styles.button} onPress={uploadImage}>
-            <Text>Run Diagnosis</Text>
-          </TouchableOpacity>
-          <TouchableOpacity  style={styles.button} onPress={rejectImage}>
-            <Text>Reject</Text>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={uploadImage}>
+              <Text>Run Diagnosis</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={rejectImage}>
+              <Text>Reject</Text>
+            </TouchableOpacity>
           </View>
-        ): (
+        ) : (
           <>
-              <Text style={styles.title}>Upload image here</Text>
-          <Image
+            <Text style={styles.title}>Upload image here</Text>
+            <Image
               source={placeholderImage}
               style={styles.imgDiagnosis}
               resizeMode="cover" />
-          <Button title="Choose From Gallery" onPress={chooseFromGallery} />
-          <Button title="Capture Image" onPress={captureImage} />
+            <Button title="Choose From Gallery" onPress={chooseFromGallery} />
+            <Button title="Capture Image" onPress={captureImage} />
           </>
 
         )}
