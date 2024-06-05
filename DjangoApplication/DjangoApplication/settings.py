@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'accounts',
     "django.contrib.staticfiles",
+    'predictions',
 ]
 
 MIDDLEWARE = [
