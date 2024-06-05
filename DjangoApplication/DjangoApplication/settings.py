@@ -36,6 +36,11 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    'auditlog',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
+    'accounts',
     "django.contrib.staticfiles",
 ]
 
@@ -43,6 +48,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -69,6 +75,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "DjangoApplication.wsgi.application"
 
+CORS_ORIGIN_ALLOW_ALL = True  # For development only. Use CORS_ORIGIN_WHITELIST in production
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -80,6 +88,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'accounts.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
