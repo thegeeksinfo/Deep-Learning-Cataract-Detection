@@ -1,108 +1,155 @@
-import React, { useRef } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
-import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
-import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
-
-const sections = [
-  { id: 'getting-started', title: 'Getting Started' },
-  { id: 'uploading-image', title: 'Uploading Image' },
-  { id: 'selecting-from-gallery', title: 'Selecting from Gallery' },
-  { id: 'taking-a-picture', title: 'Taking a Picture' },
-  { id: 'running-diagnosis', title: 'Running Diagnosis' },
-  { id: 'visualizing-results', title: 'Visualizing Results' },
-  { id: 'visualizing-results-recommendations', title: 'Visualizing Results and Recommendations' },
-];
+import React from 'react';
+import { ScrollView, Text, View, StyleSheet, Button, Image } from 'react-native';
+import Header from './reusable/Header';
+import Bottommenu from './reusable/BottomMenu';
 
 const Guide = () => {
-  const scrollViewRef = useRef();
-  const translateX = useSharedValue(300); // Adjust according to the width of the map
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: withSpring(translateX.value) }],
-    };
-  });
-
-  const scrollToSection = (sectionId) => {
-    const sectionIndex = sections.findIndex((section) => section.id === sectionId);
-    if (sectionIndex !== -1) {
-      scrollViewRef.current.scrollTo({ y: sectionIndex * 100, animated: true });
-      translateX.value = 300;
-    }
-  };
-
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        <ScrollView ref={scrollViewRef} style={styles.scrollView}>
-          {sections.map((section) => (
-            <View key={section.id} style={styles.section}>
-              <Text style={styles.sectionTitle}>{section.title}</Text>
-              {/* Add section content here */}
-            </View>
-          ))}
-        </ScrollView>
+    <View style={styles.container}>
+      <Header />
+      <ScrollView style={styles.contents}>
 
-        <PanGestureHandler onGestureEvent={(event) => {
-          if (event.nativeEvent.translationX > 0) {
-            translateX.value = event.nativeEvent.translationX;
-          }
-        }}>
-          <Animated.View style={[styles.map, animatedStyle]}>
-            <TouchableOpacity style={styles.mapIcon} onPress={() => (translateX.value = 0)}>
-              <Text style={styles.mapIconText}>⇦</Text>
-            </TouchableOpacity>
-            {sections.map((section) => (
-              <TouchableOpacity key={section.id} onPress={() => scrollToSection(section.id)}>
-                <Text style={styles.mapText}>{section.title}</Text>
-              </TouchableOpacity>
-            ))}
-          </Animated.View>
-        </PanGestureHandler>
-      </View>
-    </GestureHandlerRootView>
+        {/* Getting Started */}
+        <View style={styles.section}>
+          <Text style={styles.header}>1. Getting Started</Text>
+          <Text style={styles.paragraph}>
+            Welcome to the Cataract Detection App! This application is designed to help you detect cataracts by analyzing eye images. In this guide, you will learn how to upload an image, capture a new image, view the diagnosis results, and get recommendations for optimal usage.
+          </Text>
+        </View>
+
+        {/* Image Upload */}
+        <View style={styles.section}>
+          <Text style={styles.header}>2. Image Upload</Text>
+
+          {/* From Gallery */}
+          <View style={styles.subsection}>
+            <Text style={styles.subheader}>2.1 From Gallery</Text>
+            <Text style={styles.paragraph}>
+              Follow these steps to upload an eye image from your device's gallery:
+            </Text>
+            <Text style={styles.paragraph}>
+              1. On the home page, tap the "Choose from Gallery" button.
+            </Text>
+            <Text style={styles.paragraph}>
+              2. Allow the app to access your device's storage if prompted.
+            </Text>
+            <Text style={styles.paragraph}>
+              3. Select an eye image from your gallery.
+            </Text>
+            <Text style={styles.paragraph}>
+              4. The selected image will open in a cropping editor. Adjust the image so that the eye pupil is clear and centered, then tap the "Accept" button.
+            </Text>
+            <Text style={styles.paragraph}>
+              5. The image will be displayed on a new page with two buttons: "Diagnose" and "Take Another Picture".
+            </Text>
+            <Text style={styles.paragraph}>
+              6. Tap the "Diagnose" button to send the image for analysis. Wait for the results to be displayed.
+            </Text>
+            <Text style={styles.paragraph}>
+              7. After viewing the results, tap the "Return" button to go back to the home page.
+            </Text>
+          </View>
+
+          {/* Capture Image */}
+          <View style={styles.subsection}>
+            <Text style={styles.subheader}>2.2 Capture Image</Text>
+            <Text style={styles.paragraph}>
+              Follow these steps to capture a new eye image using your device's camera:
+            </Text>
+            <Text style={styles.paragraph}>
+              1. On the home page, tap the "Capture Image" button.
+            </Text>
+            <Text style={styles.paragraph}>
+              2. Allow the app to access your device's camera if prompted.
+            </Text>
+            <Text style={styles.paragraph}>
+              3. Use the camera to take a clear picture of the eye.
+            </Text>
+            <Text style={styles.paragraph}>
+              4. The captured image will open in a cropping editor. Adjust the image so that the eye pupil is clear and centered, then tap the "Accept" button.
+            </Text>
+            <Text style={styles.paragraph}>
+              5. The image will be displayed on a new page with two buttons: "Diagnose" and "Take Another Picture".
+            </Text>
+            <Text style={styles.paragraph}>
+              6. Tap the "Diagnose" button to send the image for analysis. Wait for the results to be displayed.
+            </Text>
+            <Text style={styles.paragraph}>
+              7. After viewing the results, tap the "Return" button to go back to the home page.
+            </Text>
+          </View>
+        </View>
+
+        {/* Visualizing Results */}
+        <View style={styles.section}>
+          <Text style={styles.header}>3. Visualizing Results</Text>
+          <Text style={styles.paragraph}>
+            Once the diagnosis is complete, the results will be displayed on the screen. This includes the analyzed image and a message indicating whether cataracts were detected. If cataracts are detected, further details may be provided.
+          </Text>
+        </View>
+
+        {/* Recommendations */}
+        <View style={styles.section}>
+          <Text style={styles.header}>4. Recommendations</Text>
+          <Text style={styles.paragraph}>
+            For the most accurate results, follow these recommendations:
+          </Text>
+          <Text style={styles.paragraph}>
+            - Use a high-resolution image.
+          </Text>
+          <Text style={styles.paragraph}>
+            - Ensure good lighting conditions without glare or shadows.
+          </Text>
+          <Text style={styles.paragraph}>
+            - Make sure the eye is fully open and the pupil is centered in the image.
+          </Text>
+          <Text style={styles.paragraph}>
+            - Avoid any obstructions or reflections in the image.
+          </Text>
+        </View>
+
+        {/* Conclusion */}
+        <View style={styles.section}>
+          <Text style={styles.header}>5. Conclusion</Text>
+          <Text style={styles.paragraph}>
+            The Cataract Detection App is a powerful tool designed to assist in the early detection of cataracts. By following this guide, you can effectively use the app to monitor eye health and take timely action if cataracts are detected. We hope this app serves as a valuable resource in maintaining your eye health.
+          </Text>
+        </View>
+      </ScrollView>
+      <Bottommenu />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
+  container: {
     flex: 1,
-    padding: 20,
+  },
+  contents: {
+    paddingBottom: 50,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 20,
+    marginBottom: 50,
   },
   section: {
-    marginBottom: 20,
+    marginBottom: 24,
   },
-  sectionTitle: {
-    fontSize: 18,
+  header: {
+    fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 8,
   },
-  map: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    bottom: 0,
-    width: 300, // Adjust width as needed
-    backgroundColor: 'white',
-    borderLeftWidth: 1,
-    borderColor: 'lightgray',
-    padding: 10,
+  subheader: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    marginTop: 8,
   },
-  mapIcon: {
-    position: 'absolute',
-    left: -30,
-    top: 20,
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'lightgray',
-    borderRadius: 15,
-    padding: 5,
-  },
-  mapIconText: {
-    fontSize: 18,
-  },
-  mapText: {
-    marginVertical: 10,
+  paragraph: {
     fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 8,
   },
 });
 
