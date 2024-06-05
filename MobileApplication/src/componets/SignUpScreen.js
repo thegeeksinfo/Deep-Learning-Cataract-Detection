@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
-import { register } from '../api/api';
+import api from '../api/api';
 
 const SignUpScreen = () => {
   const [email, setEmail] = useState('');
@@ -9,7 +9,7 @@ const SignUpScreen = () => {
 
   const handleSignUp = async () => {
     try {
-      const response = await register(email, username, password);
+      const response = await api.register(email, username, password);
       console.log('Registration Success:', response.data);
       // Handle successful registration (e.g., navigate to another screen)
     } catch (error) {

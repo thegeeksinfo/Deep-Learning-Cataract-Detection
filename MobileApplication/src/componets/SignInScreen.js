@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
-import { login } from '../api/api';
+import api from '../api/api';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
@@ -8,7 +8,7 @@ const SignInScreen = () => {
 
   const handleSignIn = async () => {
     try {
-      const response = await login(email, password);
+      const response = await api.login(email, password);
       console.log('Login Success:', response.data);
       // Handle successful login (e.g., navigate to another screen)
     } catch (error) {
