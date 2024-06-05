@@ -18,7 +18,6 @@ class UserCreate(generics.CreateAPIView):
         return Response({'token': token.key})
 
 class UserLogin(generics.GenericAPIView):
-    serializer_class = UserSerializer
     permission_classes = (AllowAny,)
 
     def post(self, request, *args, **kwargs):

@@ -7,11 +7,11 @@ from django.db.models.signals import post_save
 class CustomUserManager(BaseUserManager): #overriding the custom manager
     # such that the email field is used as the unique identifier and username can be foregone 
     # even for the superuser
-    def create_user(self, email, password, **extra_fields):
+    def create_user(self, email, password, username, **extra_fields):
         if not email:
             raise ValueError('The given email must be set')
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
+        user = self.model(email=email, username=username, **extra_fields)
         if password is not None:
             user.set_password(password)
         else:
@@ -19,12 +19,6 @@ class CustomUserManager(BaseUserManager): #overriding the custom manager
         user.save(using=self._db)
         return user
 
-    def create_user(self, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_active', False)
-        extra_fields.setdefault('is_staff', False)
-        extra_fields.setdefault('is_superuser', False)
-        return self._create_user(email, password, **extra_fields)
-    
     def create_superuser(self, email, username, password=None):
         user = self.create_user(email, username, password)
         user.is_admin = True
