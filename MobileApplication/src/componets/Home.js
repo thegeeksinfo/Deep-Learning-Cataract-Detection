@@ -1,14 +1,40 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Button, PermissionsAndroid, Platform, StyleSheet } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import ImageCropPicker from 'react-native-image-crop-picker';
 import placeholderImage from "../assets/images/eye2.jpg";
 import Header from './reusable/Header';
-import styles from '../assets/styles/styles';
+import BotoomMenu from './reusable/BottomMenu';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const Home = () => {
-
   const [imageUri, setImageUri] = useState(null);
   const [showUploadButton, setShowUploadButton] = useState(true);
+
+  const requestPermissions = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.requestMultiple([
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        ]);
+        if (
+          granted[PermissionsAndroid.PERMISSIONS.CAMERA] === PermissionsAndroid.RESULTS.GRANTED &&
+          granted[PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE] === PermissionsAndroid.RESULTS.GRANTED &&
+          granted[PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE] === PermissionsAndroid.RESULTS.GRANTED
+        ) {
+          console.log('You can use the camera and storage');
+        } else {
+          console.log('Camera and storage permission denied');
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    }
+  };
 
   const chooseFromGallery = () => {
     launchImageLibrary({}, (response) => {
@@ -17,8 +43,7 @@ const Home = () => {
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
-        setImageUri(response.uri);
-        setShowUploadButton(false); // Switch to upload/reject buttons
+        cropImage(response.assets[0].uri);
       }
     });
   };
@@ -30,9 +55,22 @@ const Home = () => {
       } else if (response.error) {
         console.log('Camera Error: ', response.error);
       } else {
-        setImageUri(response.uri);
-        setShowUploadButton(false); // Switch to upload/reject buttons
+        cropImage(response.assets[0].uri);
       }
+    });
+  };
+
+  const cropImage = (uri) => {
+    ImageCropPicker.openCropper({
+      path: uri,
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      setImageUri(image.path);
+      setShowUploadButton(false);
+    }).catch(error => {
+      console.log('Error cropping image: ', error);
     });
   };
 
@@ -50,42 +88,135 @@ const Home = () => {
     setShowUploadButton(true);
   };
 
+  React.useEffect(() => {
+    requestPermissions();
+  }, []);
+
   return (
-    <>
+    <View style={styles.container}>
       <Header />
-      <View style={styles.container2}>
+      <View style={styles.contents}>
         {imageUri ? (
           <View>
-            <Text style={styles.title}>Verify Desired Image</Text>
-
-            <Image
-              source={{ uri: imageUri }}
-              style={styles.imgDiagnosis}
-              resizeMode="cover" />
-
-            <TouchableOpacity style={styles.button} onPress={uploadImage}>
-              <Text>Run Diagnosis</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={rejectImage}>
-              <Text>Reject</Text>
-            </TouchableOpacity>
+            {/* <Text style={styles.title}>Verify Desired Image</Text> */}
+            <View style={styles.imagecontainer}>
+              <Image
+                source={{ uri: imageUri }}
+                style={styles.image}
+                resizeMode="cover" />
+            </View>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.button} onPress={uploadImage}>
+                <Text>Run Diagnosis</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={rejectImage}>
+                <Text>Reject</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         ) : (
           <>
-            <Text style={styles.title}>Upload image here</Text>
-            <Image
-              source={placeholderImage}
-              style={styles.imgDiagnosis}
-              resizeMode="cover" />
-            <Button title="Choose From Gallery" onPress={chooseFromGallery} />
-            <Button title="Capture Image" onPress={captureImage} />
+            <View style={styles.imagecontainer}>
+              <Image
+                source={placeholderImage}
+                style={styles.image}
+                resizeMode="cover" />
+            </View>
+            <View style={styles.cards}>
+              <TouchableOpacity style={styles.card} onPress={chooseFromGallery}>
+                <View style={styles.cardchild}>
+                  <Icons name='view-gallery' size={30} color='#242323' />
+                  <View>
+                    <Text style={styles.cardh}>Select from Gallery</Text>
+                    <Text style={styles.cardp}>Choose this option to pick an image from your device’s photo gallery.</Text>
+                  </View>
+                </View>
+                <Button title='Choose From Gallery' style={styles.button} onPress={chooseFromGallery} />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.card} onPress={captureImage}>
+                <View style={styles.cardchild}>
+                  <Icon name='camera' size={30} color='#242323' />
+                  <View>
+                    <Text style={styles.cardh}>Use Camera</Text>
+                    <Text style={styles.cardp}>Choose this option to take a new photo using your device’s camera.</Text>
+                  </View>
+                </View>
+                <Button title='Capture Image' style={styles.button} onPress={captureImage} />
+              </TouchableOpacity>
+            </View>
           </>
-
         )}
-      </View>
-    </>
 
+      </View>
+      <BotoomMenu />
+    </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+  },
+  contents: {
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  imagecontainer: {
+    marginTop: 10,
+    display: "flex",
+    alignItems: "center",
+    height: 300,
+
+
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 10,
+  },
+
+  title: {
+    fontSize: 28,
+    margin: 10,
+    fontWeight: "700"
+  },
+  button: {
+    marginTop: 10,
+    backgroundColor: '#5AC8FA',
+    borderRadius: 10,
+    padding: 8
+  },
+
+  cards: {
+    display: "flex",
+    width: "100%",
+    marginTop: 10,
+    marginBottom: 10
+  },
+  card: {
+    borderBlockColor: 'black',
+    borderRadius: 10,
+    borderWidth: 1,
+    marginTop: 10,
+    padding: 10,
+
+  },
+  cardchild:{
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  cardh: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#000"
+  },
+  cardp: {
+    fontSize: 16,
+    color: "#000"
+  },
+  
+});
 
 export default Home;

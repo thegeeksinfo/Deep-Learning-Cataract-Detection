@@ -1,26 +1,57 @@
 import React from 'react'
-import { Text, View, Image, TouchableOpacity } from 'react-native';
-import logo from '../../assets/images/cataract_logo.jpg';
-import styles from '../../assets/styles/styles';
+import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import logo from '../../assets/images/cataract_logo_nobg.png';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { StatusBar } from 'react-native';
+
 
 function Header() {
 
   const navigation = useNavigation();
-  
+
   return (
     <View style={styles.header}>
+      <StatusBar backgroundColor="#047EEE" />
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text style={styles.headerText}>back</Text>
+        <Icon name="arrow-left" size={20} color="#fff" />
       </TouchableOpacity>
-      <Image
-        style={{ width: 40, height: 40, margin: 10 }}
-        source={logo}
-      />
-      <Text style={{ color: 'white', padding: 5, fontSize: 15 }}>BSE24-24</Text>
+      <View style={styles.logocontainer}>
+        <Image
+          style={styles.logoimage}
+          source={logo}
+        />
+        <Text style={styles.headertxt}>Cataracts Detection</Text>
+
+      </View>
+
 
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    backgroundColor: '#047EEE',
+    padding: 10
+  },
+  logocontainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  logoimage: {
+    width: 60,
+    height: 60,
+  },
+  headertxt: {
+    fontSize: 20,
+    color: '#fff',
+  }
+})
 
 export default Header
