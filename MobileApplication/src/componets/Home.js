@@ -7,11 +7,13 @@ import Header from './reusable/Header';
 import BotoomMenu from './reusable/BottomMenu';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
 
 const Home = () => {
   const [imageUri, setImageUri] = useState(null);
   const [showUploadButton, setShowUploadButton] = useState(true);
+  const navigation = useNavigation();
 
   const requestPermissions = async () => {
     if (Platform.OS === 'android') {
@@ -77,6 +79,8 @@ const Home = () => {
   const uploadImage = () => {
     // Implement image upload logic here
     console.log('Uploading:', imageUri);
+    navigation.navigate('Diagnosis');
+
     // Reset state to show original buttons
     setImageUri(null);
     setShowUploadButton(true);
@@ -106,11 +110,12 @@ const Home = () => {
                 resizeMode="cover" />
             </View>
             <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.button} onPress={uploadImage}>
-                <Text>Run Diagnosis</Text>
+              <TouchableOpacity style={styles.diagonosis} onPress={uploadImage}>
+                <Text style={styles.btntxt}>Run Diagnosis</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={rejectImage}>
-                <Text>Reject</Text>
+
+              <TouchableOpacity style={styles.reject} onPress={rejectImage}>
+                <Text style={styles.btntxt}>change image</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -126,7 +131,7 @@ const Home = () => {
               <TouchableOpacity style={styles.card} onPress={chooseFromGallery}>
                 <View style={styles.cardchild}>
                   <Icons name='view-gallery' size={30} color='#242323' />
-                  <View>
+                  <View style={styles.txts}>
                     <Text style={styles.cardh}>Select from Gallery</Text>
                     <Text style={styles.cardp}>Choose this option to pick an image from your device’s photo gallery.</Text>
                   </View>
@@ -136,7 +141,7 @@ const Home = () => {
               <TouchableOpacity style={styles.card} onPress={captureImage}>
                 <View style={styles.cardchild}>
                   <Icon name='camera' size={30} color='#242323' />
-                  <View>
+                  <View style={styles.txts}>
                     <Text style={styles.cardh}>Use Camera</Text>
                     <Text style={styles.cardp}>Choose this option to take a new photo using your device’s camera.</Text>
                   </View>
@@ -216,6 +221,37 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#000"
   },
+
+  buttonContainer: {
+    margin: 10
+  },
+  diagonosis: {
+    backgroundColor: '#5AC8FA',
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 20,
+  },
+  reject: {
+    backgroundColor: '#FF453A',
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 15,
+  },
+  btntxt: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "700"
+  },
+  txts: {
+    marginLeft: 10,
+    width: "80%",
+    marginBottom: 5,
+  }
+
+
+
   
 });
 
