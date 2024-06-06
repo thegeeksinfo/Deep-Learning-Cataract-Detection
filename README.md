@@ -67,7 +67,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - Special thanks to the TensorFlow and OpenCV communities.
 
 ## Contact
-For questions or inquiries, please contact the project team at project@example.com.
+For questions or inquiries, please contact the project team at https://sites.google.com/view/open-mrs-ecosystem/home
 
 
 
