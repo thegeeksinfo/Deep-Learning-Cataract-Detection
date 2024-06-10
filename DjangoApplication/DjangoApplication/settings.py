@@ -11,22 +11,33 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
+
+# Initialize environment variables
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+# Reading .env file
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-0h$g5pa5=f7ajia_ofx!_%pk=iy=5$iw^0bm+_zj26z+$fun!4"
+SECRET_KEY = env('SECRET_KEY', default="django-insecure-0h$g5pa5=f7ajia_ofx!_%pk=iy=5$iw^0bm+_zj26z+$fun!4")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG', default=True)
+
+def get_google_api_key():
+    return os.environ.get('GOOGLE_API_KEY')
+
+GOOGLE_API_KEY = get_google_api_key()
+
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -36,12 +47,12 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.staticfiles",
     'auditlog',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
     'accounts',
-    "django.contrib.staticfiles",
     'predictions',
 ]
 
@@ -78,7 +89,6 @@ WSGI_APPLICATION = "DjangoApplication.wsgi.application"
 
 CORS_ORIGIN_ALLOW_ALL = True  # For development only. Use CORS_ORIGIN_WHITELIST in production
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -109,7 +119,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -121,7 +130,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -131,3 +139,4 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
